@@ -1,0 +1,18 @@
+package com.artisan.util;
+
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
+
+public class ResponseUtil {
+
+	public static void write(HttpServletResponse response,Object o)throws Exception{
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out=response.getWriter();//构造一个标准输出流，把想要表达的内容传输到页面上
+		out.println(o.toString());//输出内容
+		out.flush();
+		out.close();
+	}
+}
