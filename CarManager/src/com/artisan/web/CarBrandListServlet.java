@@ -49,7 +49,11 @@ public class CarBrandListServlet extends HttpServlet {
 			con = dbUtil.getCon();
 			JSONObject result = new JSONObject();
 			JSONArray jsonArray = JsonUtil.formatRsToJsonArray(carBrandDao.getCarBrandList(con, pageBean,carBrand));
+<<<<<<< HEAD
 			//result.put("total", carBrandDao.getCarBrandTotal(con,carBrand));
+=======
+			result.put("total", carBrandDao.getCarBrandTotal(con,carBrand));
+>>>>>>> 3c65fc0840adb18e94a646c41166a64850e7b074
 			result.put("rows", jsonArray);
 			ResponseUtil.write(response, result);
 		} catch (Exception e) {

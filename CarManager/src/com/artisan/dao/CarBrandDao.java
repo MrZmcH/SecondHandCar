@@ -10,6 +10,7 @@ import com.artisan.model.PageBean;
 import com.artisan.util.StringUtil;
 
 public class CarBrandDao {
+<<<<<<< HEAD
 		StringBuffer sql=new StringBuffer("select * from c_car_brand");
 		if(!StringUtil.isEmpty(carBrand.getBrandName())){
 
@@ -20,6 +21,35 @@ public class CarBrandDao {
 
 	
 
+=======
+	
+	
+	public ResultSet getCarBrandList(Connection con,PageBean pageBean,CarBrand carBrand) throws SQLException{
+		StringBuffer sql=new StringBuffer("select * from c_car_brand");
+		if(!StringUtil.isEmpty(carBrand.getBrandName())){
+			sql.append(" where brandName like '%"+carBrand.getBrandName()+"%'");
+		}
+		if(pageBean != null){
+			sql.append(" limit " + pageBean.getStart() +"," + pageBean.getRows());
+		}
+		PreparedStatement pstmt = con.prepareStatement(sql.toString());
+		return pstmt.executeQuery();
+	}
+	
+	public int getCarBrandTotal(Connection con,CarBrand carBrand) throws SQLException{
+		int total = 0;
+		StringBuffer sql=new StringBuffer("select count(id) as total from c_car_brand");
+		if(!StringUtil.isEmpty(carBrand.getBrandName())){
+			sql.append(" where brandName like '%"+carBrand.getBrandName()+"%'");
+		}
+		PreparedStatement pstmt = con.prepareStatement(sql.toString());
+		ResultSet resultSet = pstmt.executeQuery();
+		if(resultSet.next()){
+			total = resultSet.getInt("total");
+		}
+		return total;
+	}
+>>>>>>> 3c65fc0840adb18e94a646c41166a64850e7b074
 	
 	public int deleteBrands(Connection con,String ids) throws SQLException{
 		String sql = "delete from c_car_brand where id in(" + ids + ")";
@@ -39,7 +69,11 @@ public class CarBrandDao {
 		PreparedStatement pstmt=con.prepareStatement(sql);
 		pstmt.setString(1, carBrand.getBrandName());
 		pstmt.setString(2, carBrand.getBrandInfo());
+<<<<<<< HEAD
 		pstmt.setInt(3, carBrand.getId();)
+=======
+		pstmt.setInt(3, carBrand.getId());
+>>>>>>> 3c65fc0840adb18e94a646c41166a64850e7b074
 		return pstmt.executeUpdate();
 	}
 }
